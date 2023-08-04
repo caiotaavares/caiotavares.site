@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
         - name: personal-website
-          image: your-image:latest
+          image: your-image:latest # Replace 'your-image' with the name of your container image after building
           ports:
             - containerPort: 8080
-          

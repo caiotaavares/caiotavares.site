@@ -12,6 +12,6 @@ spec:
             path: /
             backend:
               service:
-                name: personal-webiste-service
+                name: personal-website-service
                 port:
                   number: 80
