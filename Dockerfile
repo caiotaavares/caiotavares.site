@@ -6,7 +6,7 @@ COPY src/index.html /usr/share/nginx/html/
 COPY src/style.css /usr/share/nginx/html/
 COPY img/ /usr/share/nginx/html/img/
 
-# Exponha a porta 80 para acessar o servidor web
+# Exponha a porta 8080 para acessar o servidor web
 EXPOSE 8080
 
 # Comando para iniciar o servidor web quando o contêiner for executado
