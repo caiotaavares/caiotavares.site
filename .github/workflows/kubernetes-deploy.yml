@@ -17,7 +17,7 @@ jobs:
 
             - name: Build Docker Image
               run: |
-                docker build -t personal-website .
+                docker build -t personal-website:v1 .
             
             - name: Deploy App(Deployment)
               uses: actions-hub/kubectl@master
