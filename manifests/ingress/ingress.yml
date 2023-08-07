@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: personal-website-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: caiotavares.site
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: personal-website-service
+                port:
+                  number: 80
