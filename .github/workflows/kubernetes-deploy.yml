@@ -5,9 +5,22 @@ on:
         branches:
             - master
 
+env:
+    KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+
 jobs:
     deploy:
         runs-on: "self-hosted"
         steps:
             - name: Checkout
               uses: actions/checkout@v2
+            
+            - name: Deploy App(Deployment)
+              uses: actions-hub/kubectl@master
+              with:
+                args: apply -f manifests/deployment.yml
+            
+            - name: Deploy App(Service)
+              uses: actions-hub/kubectl@master
+              with:
+                args: apply -f manifests/service.yml
