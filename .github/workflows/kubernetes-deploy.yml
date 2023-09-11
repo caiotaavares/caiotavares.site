@@ -14,6 +14,10 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v2
+
+            - name: Build Docker Image
+              run: |
+                docker build -t personal-website:v1 .
             
             - name: Deploy App(Deployment)
               uses: actions-hub/kubectl@master
