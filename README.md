@@ -1,2 +1,2 @@
 # personal-website
-That's it, my personal website with Load Balancer and functional CI/CD.
+That's it, my personal website with Load Balancer and CI/CD.
