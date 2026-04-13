@@ -1,0 +1,126 @@
+body {
+    background-color: var(--darkGray);
+    background-image: none !important;
+    color: var(--grayBGColor);
+}
+
+/* Layout for blog content */
+.about-me {
+    max-width: 850px;
+    margin: 2em auto !important;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.about-me h1 {
+    color: var(--redBGColor);
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+/* Nav links in blog - no image background */
+.nav-links a {
+    color: var(--darkGray);
+    -webkit-text-fill-color: var(--darkGray);
+}
+
+/* Blog List Styles */
+.blog-post-item {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--redBGColor);
+}
+
+.blog-post-item h2 a {
+    color: var(--redBGColor);
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.blog-post-item h2 a:hover {
+    text-decoration: underline;
+}
+
+.blog-post-item p.date {
+    color: #888;
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.blog-post-item p.description {
+    color: var(--grayBGColor);
+    font-size: 20px;
+}
+
+/* Blog Content Styles */
+.blog-post-content h1,
+.blog-post-content h2,
+.blog-post-content h3 {
+    color: var(--redBGColor);
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+}
+
+.blog-post-content p {
+    color: var(--grayBGColor);
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 1.2em;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+    color: var(--grayBGColor);
+    font-size: 20px;
+    margin-left: 25px;
+    margin-bottom: 1.2em;
+}
+
+.blog-post-content li {
+    margin-bottom: 0.5em;
+}
+
+.blog-post-content a {
+    color: var(--redBGColor);
+    text-decoration: underline;
+}
+
+.blog-post-content a:hover {
+    filter: brightness(1.2);
+}
+
+.blog-post-content code {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: var(--white);
+}
+
+.blog-post-content pre {
+    background-color: #000;
+    padding: 1.2em;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+    border: 1px solid #333;
+}
+
+.blog-post-content pre code {
+    background-color: transparent;
+    padding: 0;
+    color: #e0e0e0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5em;
+    color: var(--redBGColor);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
