@@ -1,0 +1,15 @@
+---
+import Layout from './LayoutPost.astro';
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+    <div class="centered-text red-text">
+        <div class="about-me">
+            <a href="/blog" class="back-link"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+            <div class="blog-post-content">
+                <slot />
+            </div>
+        </div>
+    </div>
+</Layout>

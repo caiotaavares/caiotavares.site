@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 80px;
+}
+
+body {
+    background-image: url('/img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 10px;
+    /* Adiciona espaçamento interno */
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Garante que o corpo ocupe toda a altura da tela */
+    margin: 0;
+    /* Remove margens que possam interferir */
+}
+
+/* Global Variables */
+:root {
+    --redBGColor: #c41111;
+    --grayBGColor: rgb(233, 233, 233);
+}
+
+/* CSS Reset */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-size: 22px;
+    color: var(--redBGColor);
+    margin: 5vh;
+}
+
+.profile {
+    text-align: left;
+}
+
+.profile img {
+    border-radius: 0%;
+}
+
+.profile h1 {
+    background-color: var(--redBGColor);
+    overflow: hidden;
+    display: inline-block;
+    padding: 4px;
+    font-weight: bold;
+    font-family: arial;
+    color: transparent;
+    font-size: 42px;
+}
+
+span {
+    background: url('/img/background.jpg') -20px -400px no-repeat;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    display: block;
+}
+
+/* Body styles */
+.centered-text {
+    text-align: left;
+}
+
+.red-text {
+    color: var(--redBGColor)
+}
+
+.about-me {
+    margin: 3em;
+}
+
+.about-me h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.about-me {
+    font-size: 24px;
+    color: var(--redBGColor);
+}
+
+.about-me p {
+    font-size: 20px;
+    color: var(--grayBGColor);
+    padding: 2px;
+}
+
+/* Social icons */
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 34px;
+    color: var(--grayBGColor)
+}
+
+/* Footer styles */
+.footer {
+    text-align: center;
+    color: var(--grayBGColor);
+    background-color: var(--redBGColor);
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: auto;
+    /* Empurra o rodapé para o final */
+}
+
+/* Adicionar para telas pequenas */
+@media (max-height: 500px) {
+    .footer {
+        position: static;
+        /* Desativa o fixo para telas pequenas */
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        font-size: 18px;
+    }
+
+    .about-me h1 {
+        font-size: 28px;
+    }
+
+    .social-icons a {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile img {
+        width: 100px;
+    }
+
+    .about-me h1 {
+        font-size: 22px;
+    }
+}
+
+/* Nav Links Styles */
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Preenche até o canto direito */
+    z-index: 1000;
+    background-color: var(--redBGColor);
+    /* O fundo da barra agora é o seu vermelho */
+    display: flex;
+    justify-content: flex-start;
+    /* Garante que os botões comecem na esquerda */
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 15px 30px;
+
+    background: url('/img/background.jpg') fixed;
+    background-size: cover;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    transition: filter 0.3s ease;
+}
+
+.nav-links a:hover {
+    filter: brightness(1.2);
+    background-color: #9c0e0e;
+}
+
+/* Blog specific styles */
+.blog-post-item {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--redBGColor);
+}
+
+.blog-post-item h2 a {
+    color: var(--redBGColor);
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.blog-post-item h2 a:hover {
+    text-decoration: underline;
+}
+
+.blog-post-item p.date {
+    color: var(--grayBGColor);
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: inline-block;
+    padding: 2px 0;
+}
+
+.blog-post-item p.description {
+    color: var(--grayBGColor);
+    font-size: 20px;
+}
+
+.blog-post-content h1,
+.blog-post-content h2,
+.blog-post-content h3 {
+    color: var(--redBGColor);
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.blog-post-content p {
+    color: var(--grayBGColor);
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+    color: var(--grayBGColor);
+    font-size: 20px;
+    margin-left: 20px;
+    margin-bottom: 1em;
+}
+
+.blog-post-content a {
+    color: var(--redBGColor);
+    text-decoration: none;
+}
+
+.blog-post-content a:hover {
+    text-decoration: underline;
+}
+
+.blog-post-content code {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: var(--grayBGColor);
+}
+
+.blog-post-content pre {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1em;
+}
+
+.blog-post-content pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1em;
+    color: var(--redBGColor);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}

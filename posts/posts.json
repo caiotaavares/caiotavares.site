@@ -1,0 +1,9 @@
+[
+  {
+    "id": "meu-primeiro-post",
+    "title": "Configuração rápida do Loki com Docker",
+    "date": "2024-04-13",
+    "file": "meu-primeiro-post.md",
+    "description": "Neste post eu mostro rapidamente como você pode fazer o deploy do Loki + Grafana na sua máquina usando docker-compose em 5 minutos para testar sua aplicação."
+  }
+]
