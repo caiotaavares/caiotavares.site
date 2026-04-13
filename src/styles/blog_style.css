@@ -9,12 +9,12 @@ body {
     max-width: 850px;
     margin: 2em auto !important;
     padding: 20px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .about-me h1 {
     color: var(--redBGColor);
-    font-size: 34px;
+    font-size: 24px;
     margin-bottom: 20px;
 }
 
@@ -64,7 +64,7 @@ body {
 
 .blog-post-content p {
     color: var(--grayBGColor);
-    font-size: 20px;
+    font-size: 15px;
     line-height: 1.6;
     margin-bottom: 1.2em;
 }
