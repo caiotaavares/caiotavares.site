@@ -1,22 +1,31 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: "Como usar o s3 do NetAPP no grafana loki"
+title: "Como usar o S3 do NetApp no Grafana Loki"
 date: "2026-04-13"
-tags: [Loki, NetAPP, s3, apisix, logging]
+tags: [Loki, NetApp, s3, apisix, logging]
+alternate: "/en/posts/loki-on-prem-s3"
 ---
-# Intro
-O s3 se tornou o queridinho dos desenvolvedores quando o assunto é armazenamento de objetos, não só na nuvem (onde ele brlha),onde é oferecida escalabilidade e ifraestrutura quase infinita, como também on-premisses, ele se tornou uma opção disponibilizada por ferramentas como Minio e o NetAPP.
 
-Recentemente precisei fazer uma alteração em algumas ferramentas de logging e a stack do grafana loki me pareceu uma boa opção
+# Intro
+
+O S3 se tornou o padrão absoluto quando o assunto é armazenamento de objetos. Ele brilha na nuvem pela sua escalabilidade e infraestrutura quase infinita, mas também se consolidou no cenário *on-premises* através de ferramentas como MinIO e **NetApp**.
+
+Recentemente, precisei realizar uma manutenção em algumas ferramentas de logging e a stack do **Grafana Loki** se mostrou uma excelente opção para o nosso ambiente.
 
 # S3
-A primeira coisa que precisamos é das configurações do S3, e das AccessKeys do bucket que vamos usar
-Das configurações do S3 vamos precisar do `endpoint: https://s3.example.com` e `region: us-east-1`. Das configurações do bucket vamos precisar da AccessKey de acesso ao bucket: `UserName`, `AccessKeyId` e `SecretAccessKey`.
 
-```
+A primeira coisa que precisamos são as configurações de conexão do S3 e as credenciais (*AccessKeys*) do bucket que será utilizado.
+
+Para este exemplo, precisaremos dos seguintes dados:
+* **Endpoint:** `https://s3.example.com`
+* **Region:** `us-east-1`
+* **Bucket:** `loki-s3bucket`
+* **Credenciais:** `AccessKeyId` e `SecretAccessKey`
+
+```json
 {
-    "Endpoint": https://s3.example.com
-    "Region": us-east-1
+    "Endpoint": "[https://s3.example.com](https://s3.example.com)",
+    "Region": "us-east-1"
 }
 
 {
@@ -26,22 +35,21 @@ Das configurações do S3 vamos precisar do `endpoint: https://s3.example.com` e
         "SecretAccessKey": "yoursecretaccesskey"
     }
 }
-
 ```
 # Helm Chart
-Antes da configuração, devemos baixar o helm chart
-
-*obviamente vc tem que ter o helm instalado*
-
-`helm repo add grafana https://grafana.github.io/helm-charts`
-
-Com `helm show values` é possível ver a opções disponíveis na versão atual do chart.
-
-`helm show values grafana/loki > values.yaml`
-
-O trecho que importa para nós e o seguinte:
+Antes de iniciar a configuração, devemos adicionar o repositório e baixar o Helm Chart oficial (considerando que você já possui o Helm instalado):
 
 ```
+# Adicionando o repositório
+helm repo add grafana [https://grafana.github.io/helm-charts](https://grafana.github.io/helm-charts)
+
+# Gerando o arquivo values.yaml para conferir as opções
+helm show values grafana/loki > values.yaml
+```
+
+O trecho que realmente importa para a persistência dos dados é a seção de storage:
+
+```yaml
 loki:
     storage:
         s3:
@@ -81,11 +89,11 @@ loki:
                 http: {}
 ```
 
-Aqui as configurações do s3 diferem um pouco de quanto estamos usando um S3 na nuvem, principalmente a url de acesso ao s3, que segue o padrão: `https://<nome-do-bucket>.s3.<região>.amazonaws.com`, aqui vamos seguir o padrão `http://<AccessKeyId>:<SecretAccessKey>@<Endpoint>:<port>`
+As configurações do S3 on-premises diferem um pouco de quando estamos usando o S3 nativo da AWS. Enquanto na nuvem a URL segue o padrão `https://<nome-do-bucket>.s3.<região>.amazonaws.com`, aqui seguiremos o formato de conexão: `http://<AccessKeyId>:<SecretAccessKey>@<Endpoint>:<port>`.
 
-E esse será o padrão que usaremos para conectar no S3
+Abaixo, a configuração ajustada para o nosso cenário:
 
-```
+```yaml
 loki:
     storage:
         bucketNames:
@@ -94,11 +102,11 @@ loki:
             admin: loki-s3bucket
         type: s3
         s3:
-            s3: "http://<AccessKeyId>:<SecretAccessKey>@<Endpoint>:<port>"
-            endpoint: <Endpoint>
-            region: <Region>
-            accessKeyId: "<AccessKeyId>"
-            secretAccessKey: "<SecretAccessKey>"
+            s3: "[http://youraccesskeyid:yoursecretaccesskey@s3.example.com:443](http://youraccesskeyid:yoursecretaccesskey@s3.example.com:443)"
+            endpoint: s3.example.com
+            region: us-east-1
+            accessKeyId: "youraccesskeyid"
+            secretAccessKey: "yoursecretaccesskey"
             s3ForcePathStyle: true
             insecure: false
             http_config:
@@ -109,19 +117,19 @@ loki:
         object_store:
             type: s3
             s3:
-                s3: "http://<AccessKeyId>:<SecretAccessKey>@<Endpoint>:<port>"
-                endpoint: <Endpoint>
-                bucket_name: <UserName>
-                region: <Region>
-                access_key_id: "<AccessKeyId>"
-                secret_access_key: "<SecretAccessKey>"
+                s3: "[http://youraccesskeyid:yoursecretaccesskey@s3.example.com:443](http://youraccesskeyid:yoursecretaccesskey@s3.example.com:443)"
+                endpoint: [https://s3.example.com](https://s3.example.com)
+                bucket_name: loki-s3bucket
+                region: us-east-1
+                access_key_id: "youraccesskeyid"
+                secret_access_key: "yoursecretaccesskey"
                 insecure: false
                 sse: {}
 ```
 
-no nosso caso fica assim:
+ou
 
-```
+```yaml
 loki:
     storage:
         bucketNames:
@@ -130,7 +138,7 @@ loki:
             admin: loki-s3bucket
         type: s3
         s3:
-            s3: "http://youraccesskeyid:yoursecretaccesskey@s3.example.com:<port>"
+            s3: "https://youraccesskeyid:yoursecretaccesskey@s3.example.com:443"
             endpoint: https://s3.example.com.br
             region: us-east-1
             accessKeyId: "youraccesskeyid"
@@ -145,7 +153,7 @@ loki:
         object_store:
             type: s3
             s3:
-                s3: "http://youraccesskeyid:yoursecretaccesskey@s3.example.com:<port>"
+                s3: "https://youraccesskeyid:yoursecretaccesskey@s3.example.com:443"
                 endpoint: https://s3.example.com.br
                 bucket_name: loki-s3bucket
                 region: us-east-1
@@ -154,3 +162,10 @@ loki:
                 insecure: false
                 sse: {}
 ```
+
+# Virtual Host Style vs Path Style (s3ForcePathStyle: false)
+É o padrão moderno da AWS. O nome do bucket vira um subdomínio. Quando `s3ForcePathStyle = true` O nome do bucket é tratado como um diretório no caminho da URL, ou seja, `https://s3.amazonaws.com/nome-do-bucket`. É isso que desejamos, já que o nosso s3 é exposto exatamente dessa forma.
+
+Se você não está usando a AWS oficial, você provavelmente está usando uma solução de storage "S3-compatible" (como MinIO ou Ceph). Muitas dessas ferramentas não têm suporte a roteamento por subdomínio DNS dinâmico. Ou seja, o seu servidor DNS não sabe resolver automaticamente qualquer `*.s3.example.com.br`.
+
+Quando `s3ForcePathStyle = false` o Loki tentará acessar loki-s3bucket.s3.example.com.br.
