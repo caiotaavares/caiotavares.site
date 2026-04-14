@@ -46,12 +46,32 @@ body {
     font-size: 16px;
     margin-bottom: 8px;
     display: inline-block;
+    margin-right: 15px;
 }
 
-.blog-post-item p.description {
-    color: var(--grayBGColor);
-    font-size: 15px;
+.tag-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    vertical-align: middle;
 }
+
+.tag {
+    background-color: var(--redBGColor);
+    color: var(--white);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    transition: filter 0.2s ease;
+}
+
+.tag:hover {
+    filter: brightness(1.2);
+}
+
 
 /* Blog Content Styles */
 .blog-post-content h1,

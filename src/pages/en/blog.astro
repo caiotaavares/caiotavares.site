@@ -21,7 +21,14 @@ const lang = Astro.currentLocale; // 'en'
                     <div class="blog-post-item">
                         <h2><a href={post.url}>{post.frontmatter.title}</a></h2>
                         <p class="date"><i class="fa-regular fa-calendar"></i> {post.frontmatter.date}</p>
-                        <p class="description">{post.frontmatter.description}</p>
+                        {post.frontmatter.tags && (
+                            <div class="tag-container">
+                                {post.frontmatter.tags.map(tag => (
+                                    <span class="tag">{tag}</span>
+                                ))}
+                            </div>
+                        )}
+
                     </div>
                 ))
             )}

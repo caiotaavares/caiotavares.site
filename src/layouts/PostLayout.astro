@@ -19,8 +19,18 @@ const alternate = frontmatter.alternate;
                 <i class="fa-solid fa-arrow-left"></i> {t.back}
             </a>
             <article class="blog-post-content">
+                <h1>{frontmatter.title}</h1>
+                <p class="date"><i class="fa-regular fa-calendar"></i> {frontmatter.date}</p>
+                {frontmatter.tags && (
+                    <div class="tag-container" style="margin-bottom: 2em;">
+                        {frontmatter.tags.map(tag => (
+                            <span class="tag">{tag}</span>
+                        ))}
+                    </div>
+                )}
                 <slot />
             </article>
+
         </div>
     </div>  
 </Layout>

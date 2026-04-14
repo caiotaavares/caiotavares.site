@@ -2,9 +2,10 @@
 layout: ../../../layouts/PostLayout.astro
 title: "Quick Loki Setup with Docker"
 date: "2024-04-13"
-description: "In this post I quickly show how you can deploy Loki + Grafana on your machine using docker-compose in 5 minutes to test your application."
 alternate: "/posts/meu-primeiro-post"
+tags: ["loki", "grafana", "docker", "logging"]
 ---
+
 # Quick Loki Setup with Docker
 
 Recently I needed to test the integration of my local logs sending data to **Loki**. 
