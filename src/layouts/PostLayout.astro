@@ -1,13 +1,22 @@
 ---
 import Layout from './LayoutBlog.astro';
 const { frontmatter } = Astro.props;
+const lang = Astro.currentLocale || 'pt';
+
+const t = {
+    pt: { back: "Voltar" },
+    en: { back: "Back" }
+}[lang];
+
+// For posts, we can use an 'alternate' field in the frontmatter to link to the translated version
+const alternate = frontmatter.alternate;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} alternate={alternate}>
     <div class="blog-post-page">
         <div class="about-me">
-            <a href="/blog" class="back-link">
-                <i class="fa-solid fa-arrow-left"></i> Voltar
+            <a href={lang === 'en' ? "/en/blog" : "/blog"} class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> {t.back}
             </a>
             <article class="blog-post-content">
                 <slot />

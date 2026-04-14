@@ -1,24 +1,53 @@
 ---
 import '../styles/global.css';
 import '../styles/blog_style.css';
+import LanguagePicker from '../components/LanguagePicker.astro';
 
-const { title = "Caio Tavares" } = Astro.props;
+const { title = "Caio Tavares", alternate } = Astro.props;
+const lang = Astro.currentLocale || 'pt';
+
+const t = {
+    pt: { home: "Início", blog: "Blog", copyright: "Feito com", by: "Por" },
+    en: { home: "Home", blog: "Blog", copyright: "Made with", by: "By" }
+}[lang];
+
+// SEO: Hreflang
+// If 'alternate' is passed, it should be the absolute or relative URL to the other version
+const currentUrl = new URL(Astro.url.pathname, Astro.site || 'https://caiotavares.site');
+const isEn = lang === 'en';
+
+let alternateUrl;
+if (alternate) {
+    alternateUrl = new URL(alternate, Astro.site || 'https://caiotavares.site');
+} else {
+    // Basic automatic mapping
+    if (isEn) {
+        alternateUrl = new URL(Astro.url.pathname.replace(/^\/en/, '') || '/', Astro.site || 'https://caiotavares.site');
+    } else {
+        alternateUrl = new URL(`/en${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`, Astro.site || 'https://caiotavares.site');
+    }
+}
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
+    
+    <!-- SEO: Hreflang -->
+    <link rel="alternate" hreflang={isEn ? 'pt' : 'en'} href={alternateUrl} />
+    <link rel="alternate" hreflang="x-default" href={isEn ? alternateUrl : currentUrl} />
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="nav-container">
             <nav class="nav-links">
-                <a href="/">Home</a>
-                <a href="/blog">Blog</a>
+                <a href={isEn ? "/en" : "/"}>{t.home}</a>
+                <a href={isEn ? "/en/blog" : "/blog"}>{t.blog}</a>
+                <LanguagePicker />
             </nav>
         </div>
     </header>
@@ -27,10 +56,11 @@ const { title = "Caio Tavares" } = Astro.props;
 
     <!-- Footer -->
     <div class="footer">
-        <p>&copy; Copyright 2024 <br>Maked with <i class="fa-solid fa-mug-hot"></i> By Caio Tavares</p>
+        <p>&copy; Copyright 2024 <br>{t.copyright} <i class="fa-solid fa-mug-hot"></i> {t.by} Caio Tavares</p>
     </div>
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/aa5f332820.js" crossorigin="anonymous"></script>
 </body>
 </html>
+

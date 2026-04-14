@@ -24,21 +24,24 @@ body {
     font-size: 42px;
 }
 
-span {
+.profile h1 span {
     background: url('/img/background.jpg') -20px -400px no-repeat;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     display: block;
 }
 
+
 /* Home specific nav link effect */
 .nav-links a {
-    background: url('/img/background.jpg') fixed;
+    /* background: url('/img/background.jpg') fixed;
     background-size: cover;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background-clip: text; */
+    color: var(--darkGray);
 }
+
 
 /* Body styles */
 .centered-text {

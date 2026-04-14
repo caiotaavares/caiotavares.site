@@ -1,0 +1,53 @@
+---
+const { currentLocale } = Astro;
+const isEn = currentLocale === 'en';
+
+// Simple logic to find the "other" URL
+// In a more complex site, we might want a mapping of paths
+const currentPath = Astro.url.pathname;
+const otherLocale = isEn ? 'pt' : 'en';
+
+let targetUrl;
+if (isEn) {
+    // Remove /en from the start
+    targetUrl = currentPath.replace(/^\/en/, '') || '/';
+} else {
+    // Add /en to the start, but avoid //
+    targetUrl = `/en${currentPath === '/' ? '' : currentPath}`;
+}
+---
+
+<div class="language-picker">
+    <a href={targetUrl} class="lang-link">
+        <span class={!isEn ? "active" : ""}>PT</span> | <span class={isEn ? "active" : ""}>EN</span>
+    </a>
+</div>
+
+<style>
+    .language-picker {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 1rem;
+        font-family: inherit;
+    }
+    .lang-link {
+        text-decoration: none;
+        color: var(--darkGray);
+        font-size: 0.9rem;
+        font-weight: 500;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+    }
+
+    .lang-link:hover {
+        opacity: 1;
+    }
+    .lang-link span {
+        display: inline;
+    }
+    .active {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+
