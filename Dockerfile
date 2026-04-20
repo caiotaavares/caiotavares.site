@@ -1,9 +1,11 @@
-FROM nginx:alpine
+FROM node:lts AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-COPY src/index.html /usr/share/nginx/html/
-COPY src/style.css /usr/share/nginx/html/
-COPY img/ /usr/share/nginx/html/img/
-
+FROM nginx:alpine AS runtime
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080
-
-CMD ["nginx", "-g", "daemon off;"]
