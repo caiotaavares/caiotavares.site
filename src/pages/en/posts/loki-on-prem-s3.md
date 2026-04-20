@@ -1,6 +1,6 @@
 ---
 layout: ../../../layouts/PostLayout.astro
-title: "Como usar o S3 do NetApp no Grafana Loki"
+title: "How to use NetApp S3 on Grafana Loki"
 date: "2026-04-13"
 tags: [Loki, NetApp, s3, apisix, logging]
 alternate: "/en/posts/loki-on-prem-s3"
