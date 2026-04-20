@@ -7,28 +7,42 @@ const posts = await Astro.glob('./posts/*.md');
 posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
 
 const lang = Astro.currentLocale; // 'en'
+
+const postsByYear = posts.reduce((acc: Record<string, any[]>, post) => {
+    const year = new Date(post.frontmatter.date).getFullYear().toString();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(post);
+    return acc;
+}, {});
+
+const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
 <Layout title="Blog - Caio Tavares">
     <div class="centered-text red-text">
         <div class="about-me" id="blog-container">
-            <h1>Blog</h1>
+            <div class="profile" style="text-align: center; margin-bottom: 3em;">
+                <h1 style="background-color: var(--redBGColor); display: inline-block; padding: 4px; font-weight: bold; font-family: Arial, sans-serif; color: var(--darkGray); font-size: 42px; margin: 0;">
+                    Caio Tavares
+                </h1>
+                <p style="color: #888; font-size: 0.9em; font-weight: bold; font-family: serif; letter-spacing: 2px; margin-top: 10px;">
+                    <a href="/blog" style="color: #aaa; text-decoration: none;">PT</a> | EN
+                </p>
+            </div>
             
-            {posts.length === 0 ? (
+            {years.length === 0 ? (
                 <p>No posts found.</p>
             ) : (
-                posts.map(post => (
-                    <div class="blog-post-item">
-                        <h2><a href={post.url}>{post.frontmatter.title}</a></h2>
-                        <p class="date"><i class="fa-regular fa-calendar"></i> {post.frontmatter.date}</p>
-                        {post.frontmatter.tags && (
-                            <div class="tag-container">
-                                {post.frontmatter.tags.map(tag => (
-                                    <span class="tag">{tag}</span>
-                                ))}
-                            </div>
-                        )}
-
+                years.map(year => (
+                    <div class="year-group" style="text-align: left; margin-bottom: 2.5em;">
+                        <h2 style="color: #fff; font-size: 1.8em; border-bottom: 1px solid #333; padding-bottom: 0.3em; margin-bottom: 1em; font-weight: bold;">{year}</h2>
+                        <ul style="list-style-type: disc; padding-left: 20px;">
+                            {postsByYear[year].map(post => (
+                                <li style="margin-bottom: 1.2em; color: var(--grayBGColor);">
+                                    <a href={post.url} style="color: #3291ff; text-decoration: none; font-size: 1.1em;">{post.frontmatter.title}</a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 ))
             )}
