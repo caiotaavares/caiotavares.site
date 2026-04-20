@@ -2,7 +2,6 @@
 layout: ../../layouts/PostLayout.astro
 title: "Configuração rápida do Loki com Docker"
 date: "2024-04-13"
-description: "Neste post eu mostro rapidamente como você pode fazer o deploy do Loki + Grafana na sua máquina usando docker-compose em 5 minutos para testar sua aplicação."
 alternate: "/en/posts/my-first-post"
 tags: ["loki", "grafana", "docker", "logging"]
 ---
