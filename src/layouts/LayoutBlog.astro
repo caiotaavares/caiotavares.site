@@ -7,8 +7,8 @@ const { title = "Caio Tavares", alternate } = Astro.props;
 const lang = Astro.currentLocale || 'pt';
 
 const t = {
-    pt: { home: "Início", blog: "Blog", copyright: "Feito com", by: "Por" },
-    en: { home: "Home", blog: "Blog", copyright: "Made with", by: "By" }
+    pt: { home: "Início", blog: "Blog", made: "com tecnologia astro", copyright: "2024 - 2026 Caio Tavares - Todos os direitos reservados" },
+    en: { home: "Home", blog: "Blog", made: "with astro technology", copyright: "2024 - 2026 Caio Tavares - All rights reserved" }
 }[lang];
 
 // SEO: Hreflang
@@ -56,7 +56,17 @@ if (alternate) {
 
     <!-- Footer -->
     <div class="footer">
-        <p>&copy; Copyright 2024 <br>{t.copyright} <i class="fa-solid fa-mug-hot"></i> {t.by} Caio Tavares</p>
+        <div class="footer-made">
+            <p>
+                <a href="https://github.com/withastro/astro">{t.made}</a> 
+                <i class="fa-solid fa-mug-hot"></i>
+            </p>
+        </div>
+        <div class="footer-rights">
+            <p>
+                &copy; {t.copyright} <br/><br/> 
+            <p/>
+        </div>
     </div>
 
     <!-- FontAwesome -->

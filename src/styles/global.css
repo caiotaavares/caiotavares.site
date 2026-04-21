@@ -84,7 +84,8 @@ header {
 
 /* Footer styles */
 .footer {
-    text-align: center;
+    font-size: 12px;
+    text-align: left;
     color: var(--grayBGColor);
     background-color: var(--redBGColor);
     padding: 10px;
@@ -93,6 +94,25 @@ header {
     left: 0;
     width: 100%;
     margin-top: auto;
+}
+
+.footer p {
+    margin-left: 60px;
+}
+
+.footer-made {
+    margin-top: 40px;
+}
+
+.footer-rights {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: var(--grayBGColor);
+    font-weight: bold;
 }
 
 @media (max-height: 500px) {
