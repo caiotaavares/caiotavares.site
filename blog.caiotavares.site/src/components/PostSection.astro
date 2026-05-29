@@ -1,0 +1,81 @@
+---
+interface Frontmatter {
+    title: string;
+    date?: string;
+    description?: string;
+}
+
+interface Post {
+    file: string;
+    frontmatter: Frontmatter;
+}
+
+// O import.meta.glob com { eager: true } é o equivalente nativo e robusto do Vite para carregar múltiplos arquivos no Astro
+const posts = Object.values(
+    import.meta.glob<Post>("../blog/*.md", { eager: true }),
+);
+---
+
+<main class="posts-section">
+    <h1>Publicações</h1>
+    <ul class="posts-list">
+        {
+            posts.map((post) => {
+                // Gera o slug a partir do nome do arquivo (ex: 'post1.md' -> 'post1')
+                const slug = post.file.split("/").pop().replace(".md", "");
+                return (
+                    <li class="post-item">
+                        <a href={`/posts/${slug}`} class="post-title">
+                            {post.frontmatter.title}
+                        </a>
+                        {post.frontmatter.date && (
+                            <span class="post-date">
+                                {" "}
+                                - {post.frontmatter.date}
+                            </span>
+                        )}
+                    </li>
+                );
+            })
+        }
+    </ul>
+</main>
+
+<style>
+    /* Estilos da Seção de Posts */
+
+    .posts-section h1 {
+        margin-top: 3em;
+        font-size: 50px;
+        padding-bottom: 2em;
+        color: var(--fontColor);
+        font-weight: bold;
+    }
+
+    .posts-list {
+        list-style: none;
+        padding-left: 0px;
+    }
+
+    .post-item {
+        margin-bottom: 15px;
+        font-size: 27px;
+    }
+
+    .post-title {
+        color: var(--fontColor);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .post-title:hover {
+        color: var(--redBGColor);
+    }
+
+    .post-date {
+        color: var(--fontColor);
+        font-weight: 300;
+        font-size: 22px;
+        margin-left: 10px;
+    }
+</style>

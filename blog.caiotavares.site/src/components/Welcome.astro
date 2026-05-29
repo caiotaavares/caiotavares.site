@@ -1,65 +1,15 @@
 ---
-
+import Header from "./Header.astro";
+import PostSection from "./PostSection.astro";
 ---
 
 <div class="container">
-	<header>
-		<div class="profile">
-			<h1>
-				<span>
-					<a href="https://caiotavares.site">Caio Tavares</a>
-				</span>
-			</h1>
-		</div>
-	</header>
+	<Header />
+	<PostSection />
 </div>
 
 <style>
-	* {
-		box-sizing: border-box;
-	}
-
-	body,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p,
-	ul,
-	li,
-	img {
-		margin: 0;
-		padding: 0;
-	}
-
-	header {
-		font-size: 22px;
-		color: var(--redBGColor);
-		margin-top: 2em;
-		margin-bottom: 5em;
-	}
-
-	.profile h1 {
-		background-color: var(--redBGColor);
-		overflow: hidden;
-		display: inline-block;
-		padding: 5px;
-		font-weight: bold;
-		color: transparent;
-		font-size: 27px;
-	}
-
-	.profile h1 a {
-		text-decoration: none;
-		color: #fff;
-	}
-
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 20px;
-		width: 100%;
+	:root {
+		--fontColor: #141414;
 	}
 </style>

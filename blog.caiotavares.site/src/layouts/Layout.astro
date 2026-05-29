@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="https://fontawesome.com" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="/style.css" />
 		<title>blog.caiotavares.site</title>
 	</head>
 	<body>
@@ -12,7 +12,7 @@
 	</body>
 </html>
 
-<style>
+<style is:global>
 	@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 	* {
@@ -45,21 +45,6 @@
 		position: relative;
 	}
 
-	body::before {
-		content: "";
-		position: fixed;
-		top: -10px;
-		left: -10px;
-		right: -10px;
-		bottom: -10px;
-		background-image: url("img/background.jpg");
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center;
-		filter: blur(1.6px);
-		z-index: -1;
-	}
-
 	body,
 	h1,
 	h2,
@@ -73,5 +58,13 @@
 	img {
 		margin: 0;
 		padding: 0;
+	}
+
+	/* Classe Container unificada e global para todo o site ter o mesmo padding lateral! */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px; /* Garante o mesmo padding na Home e nos Posts */
+		width: 100%;
 	}
 </style>
